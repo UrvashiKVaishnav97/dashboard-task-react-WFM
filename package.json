@@ -1,6 +1,5 @@
 {
-  "homepage": "https://UrvashiKVaishnav97.github.io/WFM-dashboard-task.git",
-
+  "homepage": "https://UrvashiKVaishnav97.github.io/dashboard-task-react-WFM",
   "name": "material-tailwind-dashboard-react",
   "private": true,
   "version": "2.1.0",
@@ -11,8 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-"deploy": "gh-pages -d build"
-
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@heroicons/react": "2.0.18",
