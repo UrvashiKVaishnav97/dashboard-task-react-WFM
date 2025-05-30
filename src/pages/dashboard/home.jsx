@@ -103,7 +103,7 @@ function EmployeeSaleCustomerChart() {
         </div>
 
         {/* Pie Chart */}
-        <div className="mt-10 h-[300px] w-full">
+        {/* <div className="mt-10 h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -126,7 +126,7 @@ function EmployeeSaleCustomerChart() {
               <ReTooltip />
             </PieChart>
           </ResponsiveContainer>
-        </div>
+        </div> */}
       </CardBody>
     </Card>
   );
