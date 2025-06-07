@@ -25,13 +25,13 @@ export const routes = [
       },
       {
         icon: <UserCircleIcon {...icon} />,
-        name: "Schedule",
+        name: "My week",
         path: "/profile",
         element: <Profile />,
       },
       {
         icon: <TableCellsIcon {...icon} />,
-        name: "Timesheet",
+        name: "Schedule",
         path: "/tables",
         element: <Tables />,
       },

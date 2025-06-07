@@ -1,220 +1,134 @@
+import React from "react";
 import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardFooter,
-  Avatar,
   Typography,
-  Tabs,
-  TabsHeader,
-  Tab,
-  Switch,
-  Tooltip,
-  Button,
+  Card,
+  CardHeader,
+  CardBody,
 } from "@material-tailwind/react";
-import {
-  HomeIcon,
-  ChatBubbleLeftEllipsisIcon,
-  Cog6ToothIcon,
-  PencilIcon,
-} from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
-import { ProfileInfoCard, MessageCard } from "@/widgets/cards";
-import { platformSettingsData, conversationsData, projectsData } from "@/data";
+
+function DashboardTables() {
+  return (
+    <div className="space-y-8">
+      {/* Your Week Table */}
+      <Card>
+        <CardHeader shadow={false} floated={false} className="bg-cyan-900 text-white p-4">
+          <Typography variant="h6">Your Week</Typography>
+        </CardHeader>
+        <CardBody className="overflow-auto">
+          <table className="min-w-full table-auto text-sm text-left">
+            <thead>
+              <tr className="bg-blue-gray-100">
+                <th className="p-2 border">Day / Hours</th>
+                {["9:00", "10:00", "11:00", "12:00", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM"].map((time) => (
+                  <th key={time} className="p-2 border">{time}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
+                <tr key={index} className="border-t align-top">
+                  <td className="p-2 border font-semibold">{day}</td>
+                  {Array.from({ length: 10 }, (_, i) => (
+                    <td key={i} className="p-2 border">{(index + i) % 3 === 0 ? "" : ""}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </CardBody>
+      </Card>
+
+      {/* Time-Off Today */}
+      <Card>
+        <CardHeader shadow={false} floated={false} className="bg-cyan-900 text-white p-4">
+          <Typography variant="h6">Upcoming Time-Off</Typography>
+        </CardHeader>
+        <CardBody>
+          <table className="w-full text-left">
+            <thead>
+              <tr className="bg-blue-gray-100">
+                <th className="p-2">Name</th>
+                <th className="p-2">Date</th>
+                <th className="p-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-2" colSpan={3}>No upcoming time offs today</td>
+              </tr>
+            </tbody>
+          </table>
+        </CardBody>
+      </Card>
+
+      {/* Trade of Request */}
+      <Card>
+        <CardHeader shadow={false} floated={false} className="bg-cyan-900 text-white p-4">
+          <Typography variant="h6">Trade of Request</Typography>
+        </CardHeader>
+        <CardBody>
+          <table className="w-full text-left">
+            <thead>
+              <tr className="bg-blue-gray-100">
+                <th className="p-2">Name</th>
+                <th className="p-2">Date</th>
+                <th className="p-2">Shift</th>
+                <th className="p-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-2">Urvashi</td>
+                <td className="p-2">2025-06-01</td>
+                <td className="p-2">Morning <br></br>07:00 AM - 12:00 PM</td>
+                <td className="p-2 text-yellow-600">Pending</td>
+              </tr>
+              <tr>
+                <td className="p-2">Shweta</td>
+                <td className="p-2">2025-06-03</td>
+                <td className="p-2">Day <br></br>12:00 PM - 6:00 PM</td>
+                <td className="p-2 text-green-600">Approved</td>
+              </tr>
+            </tbody>
+          </table>
+        </CardBody>
+      </Card>
+
+      {/* Week's Summary */}
+      <Card>
+        <CardHeader shadow={false} floated={false} className="bg-cyan-900 text-white p-4">
+          <Typography variant="h6">Week's Summary</Typography>
+        </CardHeader>
+        <CardBody>
+          <table className="w-full text-left">
+            <thead>
+              <tr className="bg-blue-gray-100">
+                <th className="p-2">Scheduled hrs</th>
+                <th className="p-2">Schedule est. wages</th>
+                <th className="p-2">Actual hrs</th>
+                <th className="p-2">Actual wages</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-2">40</td>
+                <td className="p-2">$2000</td>
+                <td className="p-2">50</td>
+                <td className="p-2">$2500</td>
+              </tr>
+            </tbody>
+          </table>
+        </CardBody>
+      </Card>
+    </div>
+  );
+}
 
 export function Profile() {
   return (
-    <>
-      <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl bg-[url('/img/background-image.png')] bg-cover	bg-center">
-        <div className="absolute inset-0 h-full w-full bg-gray-900/75" />
-      </div>
-      <Card className="mx-3 -mt-16 mb-6 lg:mx-4 border border-blue-gray-100">
-        <CardBody className="p-4">
-          <div className="mb-10 flex items-center justify-between flex-wrap gap-6">
-            <div className="flex items-center gap-6">
-              <Avatar
-                src="/img/bruce-mars.jpeg"
-                alt="bruce-mars"
-                size="xl"
-                variant="rounded"
-                className="rounded-lg shadow-lg shadow-blue-gray-500/40"
-              />
-              <div>
-                <Typography variant="h5" color="blue-gray" className="mb-1">
-                  Richard Davis
-                </Typography>
-                <Typography
-                  variant="small"
-                  className="font-normal text-blue-gray-600"
-                >
-                  CEO / Co-Founder
-                </Typography>
-              </div>
-            </div>
-            <div className="w-96">
-              <Tabs value="app">
-                <TabsHeader>
-                  <Tab value="app">
-                    <HomeIcon className="-mt-1 mr-2 inline-block h-5 w-5" />
-                    App
-                  </Tab>
-                  <Tab value="message">
-                    <ChatBubbleLeftEllipsisIcon className="-mt-0.5 mr-2 inline-block h-5 w-5" />
-                    Message
-                  </Tab>
-                  <Tab value="settings">
-                    <Cog6ToothIcon className="-mt-1 mr-2 inline-block h-5 w-5" />
-                    Settings
-                  </Tab>
-                </TabsHeader>
-              </Tabs>
-            </div>
-          </div>
-          <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">
-            <div>
-              <Typography variant="h6" color="blue-gray" className="mb-3">
-                Platform Settings
-              </Typography>
-              <div className="flex flex-col gap-12">
-                {platformSettingsData.map(({ title, options }) => (
-                  <div key={title}>
-                    <Typography className="mb-4 block text-xs font-semibold uppercase text-blue-gray-500">
-                      {title}
-                    </Typography>
-                    <div className="flex flex-col gap-6">
-                      {options.map(({ checked, label }) => (
-                        <Switch
-                          key={label}
-                          id={label}
-                          label={label}
-                          defaultChecked={checked}
-                          labelProps={{
-                            className: "text-sm font-normal text-blue-gray-500",
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <ProfileInfoCard
-              title="Profile Information"
-              description="Hi, I'm Alec Thompson, Decisions: If you can't decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
-              details={{
-                "first name": "Alec M. Thompson",
-                mobile: "(44) 123 1234 123",
-                email: "alecthompson@mail.com",
-                location: "USA",
-                social: (
-                  <div className="flex items-center gap-4">
-                    <i className="fa-brands fa-facebook text-blue-700" />
-                    <i className="fa-brands fa-twitter text-blue-400" />
-                    <i className="fa-brands fa-instagram text-purple-500" />
-                  </div>
-                ),
-              }}
-              action={
-                <Tooltip content="Edit Profile">
-                  <PencilIcon className="h-4 w-4 cursor-pointer text-blue-gray-500" />
-                </Tooltip>
-              }
-            />
-            <div>
-              <Typography variant="h6" color="blue-gray" className="mb-3">
-                Platform Settings
-              </Typography>
-              <ul className="flex flex-col gap-6">
-                {conversationsData.map((props) => (
-                  <MessageCard
-                    key={props.name}
-                    {...props}
-                    action={
-                      <Button variant="text" size="sm">
-                        reply
-                      </Button>
-                    }
-                  />
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="px-4 pb-4">
-            <Typography variant="h6" color="blue-gray" className="mb-2">
-              Projects
-            </Typography>
-            <Typography
-              variant="small"
-              className="font-normal text-blue-gray-500"
-            >
-              Architects design houses
-            </Typography>
-            <div className="mt-6 grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4">
-              {projectsData.map(
-                ({ img, title, description, tag, route, members }) => (
-                  <Card key={title} color="transparent" shadow={false}>
-                    <CardHeader
-                      floated={false}
-                      color="gray"
-                      className="mx-0 mt-0 mb-4 h-64 xl:h-40"
-                    >
-                      <img
-                        src={img}
-                        alt={title}
-                        className="h-full w-full object-cover"
-                      />
-                    </CardHeader>
-                    <CardBody className="py-0 px-1">
-                      <Typography
-                        variant="small"
-                        className="font-normal text-blue-gray-500"
-                      >
-                        {tag}
-                      </Typography>
-                      <Typography
-                        variant="h5"
-                        color="blue-gray"
-                        className="mt-1 mb-2"
-                      >
-                        {title}
-                      </Typography>
-                      <Typography
-                        variant="small"
-                        className="font-normal text-blue-gray-500"
-                      >
-                        {description}
-                      </Typography>
-                    </CardBody>
-                    <CardFooter className="mt-6 flex items-center justify-between py-0 px-1">
-                      <Link to={route}>
-                        <Button variant="outlined" size="sm">
-                          view project
-                        </Button>
-                      </Link>
-                      <div>
-                        {members.map(({ img, name }, key) => (
-                          <Tooltip key={name} content={name}>
-                            <Avatar
-                              src={img}
-                              alt={name}
-                              size="xs"
-                              variant="circular"
-                              className={`cursor-pointer border-2 border-white ${
-                                key === 0 ? "" : "-ml-2.5"
-                              }`}
-                            />
-                          </Tooltip>
-                        ))}
-                      </div>
-                    </CardFooter>
-                  </Card>
-                )
-              )}
-            </div>
-          </div>
-        </CardBody>
-      </Card>
-    </>
+    <div className="mt-12 space-y-12">
+      <DashboardTables />
+    </div>
   );
 }
 
